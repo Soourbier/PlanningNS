@@ -75,5 +75,11 @@ function updatePlanning() {
     }
 }
 
+// Événement pour ajouter un employé lors de la soumission du formulaire
+document.getElementById('employee-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    addEmployee();
+});
+
 // Charger le planning au démarrage
 document.addEventListener('DOMContentLoaded', updatePlanning);

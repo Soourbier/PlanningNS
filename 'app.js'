@@ -2,8 +2,8 @@
 
 // Fonction pour ajouter un employé
 function addEmployee() {
-    const firstName = document.getElementById('employee-first-name').value;
-    const lastName = document.getElementById('employee-last-name').value;
+    const firstName = document.getElementById('employee-first-name').value.trim();
+    const lastName = document.getElementById('employee-last-name').value.trim();
 
     if (firstName && lastName) {
         const employee = {
@@ -23,6 +23,8 @@ function addEmployee() {
 
         // Mettre à jour le planning
         updatePlanning();
+    } else {
+        alert('Veuillez entrer un prénom et un nom.');
     }
 }
 

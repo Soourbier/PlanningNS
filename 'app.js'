@@ -1,0 +1,77 @@
+// app.js
+
+// Fonction pour ajouter un employé
+function addEmployee() {
+    const firstName = document.getElementById('employee-first-name').value;
+    const lastName = document.getElementById('employee-last-name').value;
+
+    if (firstName && lastName) {
+        const employee = {
+            id: Date.now(), // Utilisation de l'horodatage comme identifiant unique
+            firstName,
+            lastName,
+        };
+
+        // Sauvegarde dans le LocalStorage
+        let employees = JSON.parse(localStorage.getItem('employees')) || [];
+        employees.push(employee);
+        localStorage.setItem('employees', JSON.stringify(employees));
+
+        // Réinitialiser les champs du formulaire
+        document.getElementById('employee-first-name').value = '';
+        document.getElementById('employee-last-name').value = '';
+
+        // Mettre à jour le planning
+        updatePlanning();
+    }
+}
+
+// Fonction pour mettre à jour le planning dans le tableau
+function updatePlanning() {
+    const planningBody = document.getElementById('planning-body');
+    planningBody.innerHTML = ''; // Effacer le contenu actuel
+
+    const employees = JSON.parse(localStorage.getItem('employees')) || [];
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
+
+    // Pour chaque jour du mois, créer une ligne
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    for (let day = 1; day <= daysInMonth; day++) {
+        employees.forEach(employee => {
+            const tr = document.createElement('tr');
+
+            // Jour
+            const tdDay = document.createElement('td');
+            tdDay.textContent = `${day}/${currentMonth + 1}/${currentYear}`;
+            tr.appendChild(tdDay);
+
+            // Nom et Prénom de l'employé
+            const tdEmployee = document.createElement('td');
+            tdEmployee.textContent = `${employee.firstName} ${employee.lastName}`;
+            tr.appendChild(tdEmployee);
+
+            // Heure d'intervention
+            const tdHours = document.createElement('td');
+            const inputHours = document.createElement('input');
+            inputHours.type = 'text';
+            inputHours.placeholder = '00h00 à 00h00';
+            tdHours.appendChild(inputHours);
+            tr.appendChild(tdHours);
+
+            // Nom du bénéficiaire
+            const tdBeneficiary = document.createElement('td');
+            const inputBeneficiary = document.createElement('input');
+            inputBeneficiary.type = 'text';
+            inputBeneficiary.placeholder = 'Nom et Prénom';
+            tdBeneficiary.appendChild(inputBeneficiary);
+            tr.appendChild(tdBeneficiary);
+
+            planningBody.appendChild(tr);
+        });
+    }
+}
+
+// Charger le planning au démarrage
+document.addEventListener('DOMContentLoaded', updatePlanning);

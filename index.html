@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des plannings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #planning {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        input, button {
+            padding: 5px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gestion des plannings des employés</h1>
+    <div id="employee-form">
+        <h2>Ajouter un employé</h2>
+        <input type="text" id="employee-first-name" placeholder="Prénom" required>
+        <input type="text" id="employee-last-name" placeholder="Nom" required>
+        <button onclick="addEmployee()">Ajouter</button>
+    </div>
+    
+    <div id="planning">
+        <table>
+            <thead>
+                <tr>
+                    <th>Jour</th>
+                    <th>Nom et Prénom de l'employé</th>
+                    <th>Heure d'intervention</th>
+                    <th>Bénéficiaire</th>
+                </tr>
+            </thead>
+            <tbody id="planning-body">
+                <!-- Les lignes du planning seront ajoutées ici -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
